@@ -54,8 +54,10 @@ on_step= function(self,pos,dtime)
 		local all_objects = minetest.get_objects_inside_radius(position, 2)
 		local players = {}
 		local _,obj for _,obj in ipairs(all_objects) do
-			if obj:is_player() 
-		then table.insert(players, obj) end end
+			if obj:is_player() then 
+			--local nome=player:get_name()
+			
+		table.insert(players, obj) end end
 		if #players == 1 then
 			--minetest.chat_send_all(#players)
 			minetest.sound_play("catch2", {pos=position, gain = 1.0, max_hear_distance = 5})
@@ -82,7 +84,7 @@ minetest.register_entity("challenge:"..itens[i][3].."_"..colors[e][1],{   --prop
 	player_name = "",
 	drop="",
 on_activate = function(self,pos,dtime)
-		minetest.after(5, function() --atraso de5 segundos
+		minetest.after(5, function() --delay 5 seconds
 		position = self.object:get_pos()
 		if position == nil then return end
 			minetest.sound_play("catch2", {pos=position, gain = 1.0, max_hear_distance = 3})
