@@ -57,7 +57,7 @@ on_step= function(self,pos,dtime)
 			if obj:is_player() 
 		then table.insert(players, obj) end end
 		if #players == 1 then
-			minetest.chat_send_all(#players)
+			--minetest.chat_send_all(#players)
 			minetest.sound_play("catch2", {pos=position, gain = 1.0, max_hear_distance = 5})
 			minetest.add_entity(position, "challenge:"..itens[i][3].."_"..colors[e][1])
 			self.object:remove() 
