@@ -6,7 +6,7 @@ local colors={
 {"green","#00ff0070"},
 {"yellow","#ffff0070"},
 }
-
+local info_name="00"
 itens={
 		{"challenge_circle_tool","challenge_circle_closed","challenge_circle_open"},
       }
@@ -24,7 +24,6 @@ minetest.register_craftitem("challenge:"..itens[i][1].."_"..colors[e][1], {
 		local posicao = player:get_pos()
 		local node = minetest.get_node(posicao)
     if node.name == "air" then
-        --minetest.set_node(posicao, {name = "challenge:add_circle"})
 		minetest.add_entity(posicao, "challenge:"..itens[i][3].."_"..colors[e][1])
         minetest.get_node_timer(posicao):start(4.5)
     end
@@ -47,7 +46,6 @@ minetest.register_entity("challenge:"..itens[i][2].."_"..colors[e][1],{   --prop
 	backface_culling = false,
 	player_name = "",
 	drop="",
-
 on_step= function(self,pos,dtime)
 	position = self.object:get_pos()
 		if position == nil then return end
@@ -55,13 +53,18 @@ on_step= function(self,pos,dtime)
 		local players = {}
 		local _,obj for _,obj in ipairs(all_objects) do
 			if obj:is_player() then 
-			--local nome=player:get_name()
-			
-		table.insert(players, obj) end end
+			local player_name = obj:get_player_name()
+				info_name=player_name
+			table.insert(players, obj) end end
 		if #players == 1 then
-			--minetest.chat_send_all(#players)
+
 			minetest.sound_play("catch2", {pos=position, gain = 1.0, max_hear_distance = 5})
-			minetest.add_entity(position, "challenge:"..itens[i][3].."_"..colors[e][1])
+			local aberto
+			aberto=minetest.add_entity(position, "challenge:"..itens[i][3].."_"..colors[e][1])
+			aberto:set_properties({
+                                    infotext = info_name,
+                                    --nametag = info_name
+                                    })
 			self.object:remove() 
 end
 end
@@ -83,13 +86,21 @@ minetest.register_entity("challenge:"..itens[i][3].."_"..colors[e][1],{   --prop
 	backface_culling = false,
 	player_name = "",
 	drop="",
+	--infotext = "0000",
 on_activate = function(self,pos,dtime)
-		minetest.after(5, function() --delay 5 seconds
+		minetest.after(5, function() --atraso de5 segundos
 		position = self.object:get_pos()
+                       
 		if position == nil then return end
 			minetest.sound_play("catch2", {pos=position, gain = 1.0, max_hear_distance = 3})
-			minetest.add_entity(position, "challenge:"..itens[i][2].."_"..colors[e][1])
+			local fechado
+			fechado= minetest.add_entity(position, "challenge:"..itens[i][2].."_"..colors[e][1])
+			fechado:set_properties({
+                                    infotext = info_name,
+                                    --nametag = info_name
+                                    })
 			self.object:remove() 
+		
 	end)
 end
 }) 
