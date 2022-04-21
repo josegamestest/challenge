@@ -9,3 +9,19 @@ It's a tool to clean nearby objects 5 blocks away, this tool is still being made
 
 #Update
 When the player passes through the circle his name will be temporarily registered in it, if another player passes through the circle his name will be changed to the name of the new player.
+
+#Tip
+To show the player's name in the tag
+basca uncomment on the line below 66 and 100
+
+aberto:set_properties({
+                        infotext = info_name,
+                        --nametag = info_name
+})
+
+
+fechado:set_properties({
+                        infotext = info_name,
+                        --nametag = info_name
+                        })
+self.object:remove() 
