@@ -59,9 +59,9 @@ on_step= function(self,pos,dtime)
 		if #players == 1 then
 
 			minetest.sound_play("catch2", {pos=position, gain = 1.0, max_hear_distance = 5})
-			local aberto
-			aberto=minetest.add_entity(position, "challenge:"..itens[i][3].."_"..colors[e][1])
-			aberto:set_properties({
+			local open_circle
+			open_circle=minetest.add_entity(position, "challenge:"..itens[i][3].."_"..colors[e][1])
+			open_circle:set_properties({
                                     infotext = info_name,
                                     --nametag = info_name
                                     })
@@ -93,9 +93,9 @@ on_activate = function(self,pos,dtime)
                        
 		if position == nil then return end
 			minetest.sound_play("catch2", {pos=position, gain = 1.0, max_hear_distance = 3})
-			local fechado
-			fechado= minetest.add_entity(position, "challenge:"..itens[i][2].."_"..colors[e][1])
-			fechado:set_properties({
+			local closed_circle
+			closed_circle= minetest.add_entity(position, "challenge:"..itens[i][2].."_"..colors[e][1])
+			closed_circle:set_properties({
                                     infotext = info_name,
                                     --nametag = info_name
                                     })
