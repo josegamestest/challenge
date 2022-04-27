@@ -7,7 +7,7 @@ local colors={
 {"yellow","#ffff0070"},
 }
 local info_name="00"
-itens={
+local itens={
 		{"challenge_circle_tool","challenge_circle_closed","challenge_circle_open"},
       }
 for i = 1, #itens, 1 do

@@ -6,7 +6,8 @@ local colors={
 {"green","#00ff0070"},
 {"yellow","#ffff0070"},
 }
-itens={{"challenge_circle_open"},}
+
+local itens={{"challenge_circle_open","challenge_circle.png","challenge_circle_open.obj"},}
 for i = 1, #itens, 1 do
 for e = 1, #colors, 1 do
 minetest.register_node("challenge:"..itens[i][1].."_"..colors[e][1],{
@@ -18,9 +19,9 @@ minetest.register_node("challenge:"..itens[i][1].."_"..colors[e][1],{
     use_texture_alpha ="clip",
     sunlight_propagates = true,
     paramtype2 = "facedir",
-	tiles = {"challenge_circle.png^[multiply:"..colors[e][2]}, --texturas
+	tiles = {itens[i][2].."^[multiply:"..colors[e][2]}, --texturas
 	drawtype = "mesh",
-	mesh = itens[i][1]..".obj",
+	mesh = itens[i][3],
 	pathfinding= true,
 	inventory_image = {itens[i][1]..".png^[multiply:"..colors[e][2]},
 	wield_image = {itens[i][1]..".png^[multiply:"..colors[e][2]},
@@ -76,8 +77,6 @@ on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 			minetest.chat_send_player(jogador,"Name changed to:"..fields.name)
 		return true
 		end)
-		
-		
 	end,
 on_timer = function(pos,node)
 	local timer = minetest.get_node_timer(pos)
@@ -94,7 +93,6 @@ on_timer = function(pos,node)
 				if #players == 1 then
 				minetest.sound_play("catch2", {pos=pos, gain = 1.0, max_hear_distance = 5})
 	end end end
-	
 end,
 })
 end end

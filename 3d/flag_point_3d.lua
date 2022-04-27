@@ -1,30 +1,31 @@
 local colors={
-{"black","#00000070"},
-{"white","#FFFFFF70"},
-{"red","#AA000070"},
-{"blue","#0000AA70"},
-{"green","#00ff0070"},
-{"yellow","#ffff0070"},
+	{"black","#00000070"},
+	{"white","#FFFFFF70"},
+	{"red","#AA000070"},
+	{"blue","#0000AA70"},
+	{"green","#00ff0070"},
+	{"yellow","#ffff0070"},
 }
 
-itens={{"challenge_circle_tool","challenge_circle_closed","challenge_circle_open"},}
+local itens={{"challenge_circle_tool","flag_point_3d.png","flag_point_3d.obj"},}
+
 for i = 1, #itens, 1 do
 for e = 1, #colors, 1 do
-minetest.register_node("challenge:flag_point_"..colors[e][1],{
+--minetest.register_node("challenge:flag_point_"..colors[e][1],{
+minetest.register_node("challenge:flag_point_"..itens[i][1].."_"..colors[e][1],{
 	description ="flag_point_"..colors[e][1],
     ight_source = 5,
 	walkable=false,
 	on_rotate = true,
-	--drawtype = "glasslike_framed_optional",
     use_texture_alpha ="clip",
     sunlight_propagates = true,
     paramtype2 = "facedir",
-	tiles = {"challenge_circle.png^[multiply:"..colors[e][2]}, --texturas
+	tiles = {itens[i][2].."^[multiply:"..colors[e][2]}, --texturas
 	drawtype = "mesh",
-	mesh = itens[i][3]..".obj",
+	mesh = itens[i][3],
 	pathfinding= true,
-	inventory_image = {itens[i][3]..".png^[multiply:"..colors[e][2]},
-	wield_image = {itens[i][3]..".png^[multiply:"..colors[e][2]},
+	inventory_image = {itens[i][2]..".png^[multiply:"..colors[e][2]},
+	wield_image = {itens[i][2]..".png^[multiply:"..colors[e][2]},
     paramtype = "light",
     --pathfinding= false,
 	groups = {cracky=3,oddly_breakable_by_hand=3,torch=1, not_in_creative_inventory=0},
@@ -82,7 +83,7 @@ on_timer = function(pos,node)
 	local timer = minetest.get_node_timer(pos)
 	timer:start(0.2) 
 	local meta = minetest.get_meta(pos)
-	local all_objects = minetest.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, 1)
+	local all_objects = minetest.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, 2)
 	local players = {}
 		local _,obj for _,obj in ipairs(all_objects) do
 			if obj:is_player() then 
@@ -90,7 +91,6 @@ on_timer = function(pos,node)
 				if #players == 1 then
 				minetest.sound_play("catch2", {pos=pos, gain = 1.0, max_hear_distance = 5})
 	end end end
-	
 end,
 })
 end end

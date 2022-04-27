@@ -1,11 +1,7 @@
 challenge = {}
+dofile(minetest.get_modpath("challenge") .. DIR_DELIM .. "3d/chekpoints_3d.lua") 
+dofile(minetest.get_modpath("challenge") .. DIR_DELIM .. "3d/flag_point_3d.lua") 
+dofile(minetest.get_modpath("challenge") .. DIR_DELIM .. "tools/move_tool.lua") 
 
---arquivos
---fazer
-dofile(minetest.get_modpath("challenge") .. DIR_DELIM .. "chekpoints.lua") 
-dofile(minetest.get_modpath("challenge") .. DIR_DELIM .. "flag_point.lua") 
 
-dofile(minetest.get_modpath("challenge") .. DIR_DELIM .. "objetos.lua") 
-
-dofile(minetest.get_modpath("challenge") .. DIR_DELIM .. "move_tool.lua") 
 
