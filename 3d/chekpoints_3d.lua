@@ -10,11 +10,34 @@ local colors={
 local itens={{"challenge_circle_open","challenge_circle.png","challenge_circle_open.obj"},}
 for i = 1, #itens, 1 do
 for e = 1, #colors, 1 do
+	
+minetest.register_craftitem("challenge:tool"..itens[i][1].."_"..colors[e][1], {
+	stack_max = 1,
+	description = "challenge:tool"..itens[i][1].."_"..colors[e][1],
+	inventory_image = "challenge_circle_open.png^[multiply:"..colors[e][2],
+	wield_image = "challenge_circle_open.png^[multiply:"..colors[e][2],
+
+	on_use =
+		function(_, player, pointed_thing, pos)
+			jogador=player:get_player_name()
+			local position = vector.add({x=0, y=0, z=0},player:get_pos())
+			--local position = vector.add(pos, {x = 0, y =-1, z = 0})
+			if  minetest.get_node(position).name == "air" then
+				local node_add=minetest.set_node(position, {name="challenge:"..itens[i][1].."_"..colors[e][1]})
+					local meta = minetest.get_meta(position)
+					meta:set_string("infotext", (jogador))
+					meta:set_string("owner", jogador)
+					local timer = minetest.get_node_timer(position)
+					timer:start(0.2)
+			end
+		end,
+	})
+
 minetest.register_node("challenge:"..itens[i][1].."_"..colors[e][1],{
 	description =itens[i][1].."_"..colors[e][1],
     ight_source = 5,
 	walkable=false,
-	on_rotate = true,
+	--on_rotate = true,
 	--drawtype = "glasslike_framed_optional",
     use_texture_alpha ="clip",
     sunlight_propagates = true,
@@ -26,8 +49,9 @@ minetest.register_node("challenge:"..itens[i][1].."_"..colors[e][1],{
 	inventory_image = {itens[i][1]..".png^[multiply:"..colors[e][2]},
 	wield_image = {itens[i][1]..".png^[multiply:"..colors[e][2]},
     paramtype = "light",
+	drop="challenge:tool"..itens[i][1].."_"..colors[e][1],
     --pathfinding= false,
-	groups = {cracky=3,oddly_breakable_by_hand=3,torch=1, not_in_creative_inventory=0},
+	groups = {cracky=3,oddly_breakable_by_hand=3,torch=1, not_in_creative_inventory=1},
 	selection_box = {type = "fixed",	fixed = { -0.5, -0, -0.5, 0.5, 1, 0.5 }},
 	collision_box = {type = "fixed",	fixed = { -0.5, -0, -0.5, 0.5, 1, 0.5 }},
 
@@ -35,6 +59,7 @@ after_place_node = function (pos, placer)
 		local meta = minetest.get_meta(pos)
 		local timer = minetest.get_node_timer(pos)
 		timer:start(0.2)
+--[[
 		jogador=placer:get_player_name()
 		local fields="field[1.8,2;3,0.8;name;name;"..jogador.."]"
 		local sair="button_exit[1.8,4;3,1.1;exit;save]"
@@ -51,7 +76,7 @@ after_place_node = function (pos, placer)
 			meta:set_string("infotext", (fields.name))
 			meta:set_string("owner", jogador)
 		return true
-		end)
+		end)]]
 end,
 on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		local meta = minetest.get_meta(pos)
