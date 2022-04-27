@@ -11,7 +11,7 @@ local itens={{"flag_point_3d","flag_point_3d.png","flag_point_3d.obj"},}
 for i = 1, #itens, 1 do
 	for e = 1, #colors, 1 do
 	
-	minetest.register_craftitem("challenge:tool"..itens[i][1].."_"..colors[e][1], {
+	minetest.register_craftitem("challenge:tool_"..itens[i][1].."_"..colors[e][1], {
 	stack_max = 1,
 	description = "challenge:tool"..itens[i][1].."_"..colors[e][1],
 	inventory_image = "flag_point_3d.png^[multiply:"..colors[e][2],
@@ -29,6 +29,7 @@ for i = 1, #itens, 1 do
 					meta:set_string("owner", jogador)
 					local timer = minetest.get_node_timer(position)
 					timer:start(0.2)
+				minetest.after(0, function() player:get_inventory():remove_item("main", "challenge:tool_"..itens[i][1].."_"..colors[e][1]) end)
 			end
 		end,
 	})
@@ -122,3 +123,30 @@ minetest.register_node("challenge:"..itens[i][1].."_"..colors[e][1],{
 	})
 	end 
 end
+
+--recipe
+--white
+minetest.register_craft({
+	output = "challenge:tool_flag_point_3d_white",
+	recipe = {
+                  {"group:leaves",	"group:leaves",		"group:leaves"},
+                  {"group:leaves",	"default:mese_crystal",	"group:leaves"},
+                  {"group:leaves",	"group:leaves",		"group:leaves"},
+			}})
+
+--black
+minetest.register_craft({ output = "challenge:tool_flag_point_3d_black", recipe = {
+						{"challenge:tool_flag_point_3d_white", "default:coal_lump"},} })
+--red
+minetest.register_craft({ output = "challenge:tool_flag_point_3d_red", recipe = {
+						{"challenge:tool_flag_point_3d_white", "flowers:rose"},} })
+
+--blue
+minetest.register_craft({ output = "challenge:tool_flag_point_3d_blue", recipe = {
+						{"challenge:tool_flag_point_3d_white", "flowers:geranium"},} })
+--green
+minetest.register_craft({ output = "challenge:tool_flag_point_3d_green", recipe = {
+						{"challenge:tool_flag_point_3d_white", "default:cactus"},} })
+--yellow
+minetest.register_craft({ output = "challenge:tool_flag_point_3d_yellow", recipe = {
+						{"challenge:tool_flag_point_3d_white", "flowers:dandelion_yellow"},} })
