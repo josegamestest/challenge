@@ -59,7 +59,7 @@ minetest.register_node("challenge:"..itens[i][1].."_"..colors[e][1],{
 			--local meta = minetest.get_meta(pos)
 			local timer = minetest.get_node_timer(pos)
 			timer:start(0.2)
-			minetest.chat_send_all("test")
+			--minetest.chat_send_all("test")
 			--[[jogador=placer:get_player_name()
 			local fields="field[1.8,2;3,0.8;name;name;"..jogador.."]"
 			local sair="button_exit[1.8,4;3,1.1;exit;save]"
