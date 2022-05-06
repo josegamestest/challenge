@@ -3,7 +3,7 @@
 <div>
 <h1>challenge</h1>
 minetest mod challenge to create route and flight challenges
-
+<img src="https://github.com/josegamestest/challenge/blob/main/screenshot.png">
 <h2>Two types of tools</h2>
 
 <h3>challenge:tool_challenge_circle_open_#color</h3>
@@ -21,9 +21,14 @@ It's a tool to clean nearby objects 5 blocks away, this tool is still being made
 <h2>To UPDATE</h2>
 When the player passes through the circle his name will be registered in it, the name of the node can be changed by the owner
 </div>
-<img src="https://github.com/josegamestest/challenge/blob/main/screenshot.png">
-
+	
 <div>
+<h2>landing helicopter training</h2>
+Now the mod has some blocks that can help in landing training by drawing targets on the ground
+when the player lands on the location a sound is emitted
+<div>
+
+
 <h2>RECIPES</h2>
 <h3>challenge:tool_challenge_circle_open_#color</h3>
 <pre>
