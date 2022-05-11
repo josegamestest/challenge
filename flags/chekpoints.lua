@@ -15,7 +15,6 @@ for e = 1, #colors, 1 do
 		stack_max = 1,
 		description = "challenge:tool_"..itens[i][1].."_"..colors[e][1],
 		inventory_image = "challenge_circle_open.png^[multiply:"..colors[e][2],
-		wield_image = "challenge_circle_open.png^[multiply:"..colors[e][2],
 
 		on_use =
 			function(_, player, pointed_thing, pos)
@@ -47,8 +46,8 @@ for e = 1, #colors, 1 do
 		drawtype = "mesh",
 		mesh = itens[i][3],
 		pathfinding= true,
-		inventory_image = {itens[i][1]..".png^[multiply:"..colors[e][2]},
-		wield_image = {itens[i][1]..".png^[multiply:"..colors[e][2]},
+		inventory_image = itens[i][1]..".png^[multiply:"..colors[e][2],
+		wield_image = itens[i][1]..".png^[multiply:"..colors[e][2],
 		paramtype = "light",
 		drop="challenge:tool"..itens[i][1].."_"..colors[e][1],
 		--pathfinding= false,
@@ -60,24 +59,6 @@ for e = 1, #colors, 1 do
 			local meta = minetest.get_meta(pos)
 			local timer = minetest.get_node_timer(pos)
 			timer:start(0.2)
-	--[[
-			jogador=placer:get_player_name()
-			local fields="field[1.8,2;3,0.8;name;name;"..jogador.."]"
-			local sair="button_exit[1.8,4;3,1.1;exit;save]"
-					--animated_image[X,Y;W,H;name;texture_name;frame_count;frame_duration;frame_start]
-			local image="animated_image[2.5,0.2;1,1;anim;anim.png;8;2;0]"
-			local formulario = "formspec_version[5]size[6,6]"..image..fields..sair.."]"
-
-			minetest.show_formspec(jogador,"man:test",formulario)
-			minetest.register_on_player_receive_fields(function(clicker, formname, fields)
-
-			if fields.name==nil or fields.name=="" then fields.name="Posted by_"..jogador.."_undefined_name" end
-			if formname ~= "man:test" then return false end
-				local meta = minetest.get_meta(pos)
-				meta:set_string("infotext", (fields.name))
-				meta:set_string("owner", jogador)
-			return true
-			end)]]
 	end,
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 			local meta = minetest.get_meta(pos)
@@ -119,34 +100,9 @@ for e = 1, #colors, 1 do
 					if #players == 1 then
 					minetest.sound_play("catch2", {pos=pos, gain = 1.0, max_hear_distance = 5})
 		end end end
-	end,
+	end
 	})
+----------------------------------------------------------------------------------------------------------------------------------
+
 end
 end
-
---recipe
---white
-minetest.register_craft({
-	output = "challenge:tool_challenge_circle_open_white",
-	recipe = {
-                  {"group:leaves",	"group:leaves",		"group:leaves"},
-                  {"group:leaves",	"default:diamond",	"group:leaves"},
-                  {"group:leaves",	"group:leaves",		"group:leaves"},
-			}})
-
---black
-minetest.register_craft({ output = "challenge:tool_challenge_circle_open_black", recipe = {
-						{"challenge:tool_challenge_circle_open_white", "default:coal_lump"},} })
---red
-minetest.register_craft({ output = "challenge:tool_challenge_circle_open_red", recipe = {
-						{"challenge:tool_challenge_circle_open_white", "flowers:rose"},} })
-
---blue
-minetest.register_craft({ output = "challenge:tool_challenge_circle_open_blue", recipe = {
-						{"challenge:tool_challenge_circle_open_white", "flowers:geranium"},} })
---green
-minetest.register_craft({ output = "challenge:tool_challenge_circle_open_green", recipe = {
-						{"challenge:tool_challenge_circle_open_white", "default:cactus"},} })
---yellow
-minetest.register_craft({ output = "challenge:tool_challenge_circle_open_yellow", recipe = {
-						{"challenge:tool_challenge_circle_open_white", "flowers:dandelion_yellow"},} })
