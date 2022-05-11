@@ -17,6 +17,8 @@ This tool does almost the same as the previous one, but with a different feature
 <h3>challenge_remove_tool tool currently disabled</h3>
 It's a tool to clean nearby objects 5 blocks away, this tool is still being made and can remove any objects around. this tool is currently deactivating damage
 
+<h3>gas balloons</h3>
+The gas balloons come out of blocks a specific block placed on the ground, they can be used for target testing in vertical motion
 
 <h2>To UPDATE</h2>
 When the player passes through the circle his name will be registered in it, the name of the node can be changed by the owner
